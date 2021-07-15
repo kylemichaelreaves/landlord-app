@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+.map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  }
+
+.top-container {
+  position: absolute;
+  margin: 0.625rem 0.625rem 0 0.625rem;
+  width: 30rem;
+  z-index: 1;
+}
+.title {
+  position: absolute;
+  z-index: 1;
+  padding: 10px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  color: #FFFFFF;
+  background-color: #ec1f27;
+}
+
