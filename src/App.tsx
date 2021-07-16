@@ -29,9 +29,10 @@ export default function App() {
         source: 'propertyData',
         type: 'circle',
         paint: {
-          'circle-radius': 8,
           'circle-opacity': .6,
-          'circle-color': 'red'
+          'circle-color': 'red',
+          // radius can change according to case
+          'circle-radius': 8
         }
       });
 
