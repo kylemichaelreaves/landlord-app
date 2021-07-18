@@ -6,7 +6,6 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZXJlYXZlcyIsImEiOiJja3FvaGcxb2MxbXBjMndvMXYwa2t6NnBlIn0.HhkYznr4TH2i6mnV1KIvRw';
 
-
 export default function App() {
 
   const mapContainer = React.useRef<any>(null);
@@ -14,10 +13,12 @@ export default function App() {
   const [lat, setLat] = React.useState<number>(40.7346);  // for Journal Square in Jersey City
   const [zoom, setZoom] = React.useState<number>(12);
 
-  var propertyDisplay = document.getElementById('property-address');
-  var ownerDisplay = document.getElementById('owner-name');
-  var ownerAddressDisplay = document.getElementById('owner-address');
-  // var associatedPropertiesDisplay = document.getElementById('associated-properties');
+  var propertyDisplay = document.getElementById('propertyAddress');
+  var ownerDisplay = document.getElementById('ownerName');
+  var ownerAddressDisplay = document.getElementById('ownerAddress');
+
+  // can't instantiate this yet, doesn't exist yet in the data
+  // var associatedPropertiesDisplay = document.getElementById('associatedProperties');
 
   React.useEffect(() => {
     const map = new mapboxgl.Map({
@@ -29,7 +30,8 @@ export default function App() {
     map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson'
+        data: 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson',
+        'generateId': true
       });
       map.addLayer({
         id: 'property-layer',
@@ -66,18 +68,18 @@ export default function App() {
       var propertyID: any = null;
 
       map.on('mousemove', 'property-layer', (e: any) => {
-
         map.getCanvas().style.cursor = 'pointer';
-
-        var propertyAddress = e.features?.properties?.property_location;
-        var propertyOwner = e.features?.properties?.owners_name;
-        var ownerAddress = e.features?.properties?.owners_mailing_address;
+        
+        var propertyAddress = e.features[0]?.properties?.property_location;
+        var propertyOwner = e.features[0]?.properties?.owners_name;
+        var ownerAddress = e.features[0]?.properties?.owners_mailing_address;
 
         if (e.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay) {
           propertyDisplay.textContent = propertyAddress;
           ownerDisplay.textContent = propertyOwner;
           ownerAddressDisplay.textContent = ownerAddress;
         }
+
         if (propertyID) {
           map.removeFeatureState({
             source: 'propertyData',
@@ -123,6 +125,7 @@ export default function App() {
   return (
     <div className="App">
       <div className="top-container">
+        {/* spans id must match their instatiation as vars */}
         <div><strong>Address:</strong> <span id='propertyAddress'></span></div>
         <div><strong>Owner:</strong> <span id='ownerName'></span></div>
         <div><strong>Owner's Address:</strong> <span id='ownerAddress'></span></div>
