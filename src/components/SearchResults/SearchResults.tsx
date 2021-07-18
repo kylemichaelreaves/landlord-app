@@ -1,13 +1,16 @@
 import React from 'react';
 
-interface SearchResults {
+interface Props {
     propertyAddress: string;
     ownerName: string;
     ownerAddress: string;
     associatedProperties: number;
+    associatedPropertiesList: string[];
 }
 
-export default function SearchResults () {
+export default function SearchResults (property: Props) {
 
-    return ( {} )
+    return ( {
+        
+    } )
 }
