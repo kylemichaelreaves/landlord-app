@@ -2,8 +2,13 @@ import React from 'react';
 
 // the SearchBar will take two inputs
 // onClick essentially searches the selected property and returns the result
-export default function SearchBar() {
-    const [searchTerm, setSearchTerm] = React.useState("");
+
+interface Props {
+    address: string;
+}
+
+export default function SearchBar(address: Props) {
+    const [searchTerm, setSearchTerm] = React.useState<string>("");
 
     return(
         <div className='search-bar'>

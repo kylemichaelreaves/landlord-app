@@ -8,9 +8,10 @@ interface Props {
     associatedPropertiesList: string[];
 }
 
-export default function SearchResults (property: Props) {
+export default function SearchResults (address: Props) {
 
-    return ( {
-        
-    } )
+    return ( 
+        <table>
+        </table>
+    )
 }

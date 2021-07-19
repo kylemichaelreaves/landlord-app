@@ -66,7 +66,6 @@ export default function App() {
       });
 
       var propertyID: any = null;
-
       map.on('mousemove', 'property-layer', (e: any) => {
         map.getCanvas().style.cursor = 'pointer';
         
@@ -74,6 +73,7 @@ export default function App() {
         var propertyOwner = e.features[0]?.properties?.owners_name;
         var ownerAddress = e.features[0]?.properties?.owners_mailing_address;
 
+        
         if (e.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay) {
           propertyDisplay.textContent = propertyAddress;
           ownerDisplay.textContent = propertyOwner;
