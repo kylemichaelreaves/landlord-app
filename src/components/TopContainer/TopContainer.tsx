@@ -2,7 +2,7 @@ import React from 'react';
 import '../../App.css';
 
 export default function TopContainer() {
-    var propertyAddress = document.getElementById('propertysAddress');
+    var propertyAddress = document.getElementById('propertyAddress');
     var ownerName = document.getElementById('ownerName');
     var ownerAddress = document.getElementById('ownerAddress');
     var associatedProperties = document.getElementById('associatedProperties');
