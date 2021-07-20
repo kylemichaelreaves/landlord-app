@@ -20,9 +20,6 @@ export default function App() {
   var ownerAddressDisplay = document.getElementById('ownerAddress');
   var associatedPropertiesDisplay = document.getElementById('associatedProperties');
   
-  // can't instantiate this yet, doesn't exist yet in the data
-  // var associatedPropertiesDisplay = document.getElementById('associatedProperties');
-
   React.useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainer.current,
