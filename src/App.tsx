@@ -13,10 +13,13 @@ export default function App() {
   const [lat, setLat] = React.useState<number>(40.7346);  // for Journal Square in Jersey City
   const [zoom, setZoom] = React.useState<number>(12);
 
+  var defaultOpacity = .5;
+
   var propertyDisplay = document.getElementById('propertyAddress');
   var ownerDisplay = document.getElementById('ownerName');
   var ownerAddressDisplay = document.getElementById('ownerAddress');
-
+  var associatedPropertiesDisplay = document.getElementById('associatedProperties');
+  
   // can't instantiate this yet, doesn't exist yet in the data
   // var associatedPropertiesDisplay = document.getElementById('associatedProperties');
 
@@ -38,32 +41,34 @@ export default function App() {
         source: 'propertyData',
         type: 'circle',
         paint: {
-          'circle-opacity': .5,
+          'circle-opacity': defaultOpacity,
           // colors can change according to case
           'circle-color': 'red',
           // radius can change according to case
           'circle-radius': 8
         }
       });
-      map.on('click', (e) => {
-        var features = map.queryRenderedFeatures(e.point, {
-          layers: ['property-layer']
-        });
-        if (!features.length) {
-          return;
-        };
-        var feature = features[0]
 
-        var popup = new mapboxgl.Popup({ offset: [0, -15] })
-          .setLngLat(e.lngLat)
-          .setHTML(
-            '<h3>' + feature.properties?.property_location + '</h3>' +
-            '<p>' + feature.properties?.owners_name + '</p>' +
-            '<p>' + feature.properties?.owners_mailing_address + '</p>' +
-            '<p>' + feature.properties?.city_state_zip + '</p>'
-          )
-          .addTo(map);
-      });
+      // map.on('click', (e) => {
+      //   var features = map.queryRenderedFeatures(e.point, {
+      //     layers: ['property-layer']
+      //   });
+      //   if (!features.length) {
+      //     return;
+      //   };
+      //   var feature = features[0]
+
+      //   var popup = new mapboxgl.Popup({ offset: [0, -15] })
+      //     .setLngLat(e.lngLat)
+      //     .setHTML(
+      //       '<h3>' + feature.properties?.property_location + '</h3>' +
+      //       '<p>' + feature.properties?.owners_name + '</p>' +
+      //       '<p>' + feature.properties?.owners_mailing_address + '</p>' +
+      //       '<p>' + feature.properties?.city_state_zip + '</p>' +
+      //       '<p>' + feature.properties?.asc_properties_owned + '</p>'
+      //     )
+      //     .addTo(map);
+      // });
 
       var propertyID: any = null;
       map.on('mousemove', 'property-layer', (e: any) => {
@@ -72,14 +77,14 @@ export default function App() {
         var propertyAddress = e.features[0]?.properties?.property_location;
         var propertyOwner = e.features[0]?.properties?.owners_name;
         var ownerAddress = e.features[0]?.properties?.owners_mailing_address;
-
+        var associatedProperties = e.features[0]?.properties?.num_asc_properties;
         
-        if (e.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay) {
+        if (e.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
           propertyDisplay.textContent = propertyAddress;
           ownerDisplay.textContent = propertyOwner;
           ownerAddressDisplay.textContent = ownerAddress;
+          associatedPropertiesDisplay.textContent = associatedProperties;
         }
-
         if (propertyID) {
           map.removeFeatureState({
             source: 'propertyData',
@@ -112,10 +117,12 @@ export default function App() {
           );
         }
         propertyID = null;
-        if (propertyDisplay && ownerDisplay && ownerAddressDisplay) {
+        if (propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
+          // reseting state
           propertyDisplay.textContent = '';
           ownerDisplay.textContent = '';
           ownerAddressDisplay.textContent = '';
+          associatedPropertiesDisplay.textContent = '';
         }
         map.getCanvas().style.cursor = '';
       })
@@ -124,12 +131,14 @@ export default function App() {
 
   return (
     <div className="App">
+        
       <div className="top-container">
+        <h3>FindYourLandlord by North Jersey DSA</h3>
         {/* spans id must match their instatiation as vars */}
         <div><strong>Address:</strong> <span id='propertyAddress'></span></div>
         <div><strong>Owner:</strong> <span id='ownerName'></span></div>
         <div><strong>Owner's Address:</strong> <span id='ownerAddress'></span></div>
-        <div><strong># of Associated Properties:</strong><span id='associatedProperties'></span></div>
+        <div><strong>Number of Associated Properties with Owner: </strong><span id='associatedProperties'></span></div>
       </div>
       <div ref={mapContainer} className="map-container" />
     </div>
