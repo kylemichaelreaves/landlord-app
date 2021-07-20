@@ -9,10 +9,13 @@ export default function TopContainer() {
     
     return (
         <div className="top-container">
-           <div><strong>Address:</strong> <span id='propertyAddress'></span></div>
-           <div><strong>Owner:</strong> <span id='ownerName'></span></div>
-           <div><strong>Owner's Address:</strong> <span id='ownerAddress'></span></div>
-           <div><strong># of Associated Properties:</strong><span id='associatedProperties'></span></div>
-        </div>
+        <h3>FindYourLandlord by North NJ DSA</h3>
+        {/* spans id must match their instatiation as vars */}
+        <div><strong>Address:</strong> <span id='propertyAddress'></span></div>
+        <div><strong>Owner:</strong> <span id='ownerName'></span></div>
+        <div><strong>Owner's Address:</strong> <span id='ownerAddress'></span></div>
+        <div><strong>Number of Associated Properties with Owner: </strong><span id='associatedProperties'></span></div>
+      </div>
+
     )
 }    
