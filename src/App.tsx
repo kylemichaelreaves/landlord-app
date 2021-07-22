@@ -3,8 +3,9 @@ import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import TopContainer from './components/TopContainer/TopContainer';
-import { defaultOpacity, dsaRed } from './constants';
+import SearchBar from './components/SearchBar/SearchBar';
 
+import { defaultOpacity, dsaRed } from './constants';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZXJlYXZlcyIsImEiOiJja3FvaGcxb2MxbXBjMndvMXYwa2t6NnBlIn0.HhkYznr4TH2i6mnV1KIvRw';
 
@@ -15,12 +16,12 @@ export default function App() {
   const [lat, setLat] = React.useState<number>(40.7346);  // for Journal Square in Jersey City
   const [zoom, setZoom] = React.useState<number>(12);
 
-
   var propertyDisplay = document.getElementById('propertyAddress');
   var ownerDisplay = document.getElementById('ownerName');
   var ownerAddressDisplay = document.getElementById('ownerAddress');
   var associatedPropertiesDisplay = document.getElementById('associatedProperties');
 
+  var hoverStateId = null;
 
   React.useEffect(() => {
 
@@ -78,8 +79,8 @@ export default function App() {
       //     )
       //     .addTo(map);
       // });
-
       var propertyID: any = null;
+
       map.on('mousemove', 'property-layer', (e: any) => {
         map.getCanvas().style.cursor = 'pointer';
 
@@ -143,6 +144,7 @@ export default function App() {
       <TopContainer />
       <div ref={mapContainer} className="map-container" />
     </div>
+      
 
       
 
