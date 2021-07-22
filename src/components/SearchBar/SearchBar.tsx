@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../App.css';
+import {AiOutlineSearch} from "react-icons/ai";
 
 // the SearchBar will take two inputs
 // onClick essentially searches the selected property and returns the result
@@ -19,6 +21,7 @@ export default function SearchBar(address: Props) {
                 onChange={(e: any) => console.log(e.target.value)}
                 placeholder='Search for property…'
                 />
+                <AiOutlineSearch/>
         </div>
     )
 }
