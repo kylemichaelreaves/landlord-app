@@ -1,4 +1,4 @@
-.map-container { 
+.map-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -7,16 +7,90 @@
 }
 
 .top-container {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   font-family: sans-serif;
-  margin-top: 5px;
-  margin-left: 5px;
-  padding: 5px;
-  width: 30%;
-  border: 2px solid black;
+  font-size: 20px;
+  width: 30rem;
+  
+  /* border: 2px solid black; */
   font-size: 14px;
   color: #222;
   background-color: #fff;
-  border-radius: 3px;
+  overflow: hidden;
+  
+  margin: 0.625rem 0.625rem 0 0.625rem;
+  
+  
 }
+
+.search-input {
+  width: 20rem;
+  z-index: 1;
+  font-size: 16px;
+  height: 2.5rem;
+  position: relative;
+  border: none;
+  
+  
+}
+
+
+.title {
+  z-index: 1;
+  /* position: relative; */
+  /* display: inline-block; */
+  /* margin: 10px; */
+  padding: 3px;
+
+  text-align: left;
+  /* height: 5rem; */
+  
+  font-weight: bolder;
+  font-size: 36px;
+  width: 100%;
+  text-decoration: none;
+  color: #fff;
+  background-color: #ec1f27;
+}
+
+p {
+  font-size: 16px;
+  font-weight: regular;
+  padding: 0;
+
+  
+}
+
+h3 {
+  font-weight: thinner;
+  font-size: 30px;
+  position: relative;
+  display: inline;
+  
+}
+
+h5 {
+  position: relative;
+  display: inline;
+  font-family: sans-serif;
+  font-weight: thin;
+  font-size: 30px;
+}
+
+
+
+
+.input-button {
+  color: white;
+  border-radius: 0;
+  position: relative;
+  display: flex;
+}
+  
+  
+.search-bar-container {
+  float: right;
+  align-items: center;
+  
+}  

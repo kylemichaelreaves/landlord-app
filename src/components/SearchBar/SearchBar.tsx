@@ -1,27 +1,46 @@
 import React from 'react';
 import '../../App.css';
-import {AiOutlineSearch} from "react-icons/ai";
-
-// the SearchBar will take two inputs
-// onClick essentially searches the selected property and returns the result
+import { AiOutlineSearch, AiOutlineCloseSquare } from "react-icons/ai";
 
 interface Props {
     address?: string;
 }
 
-export default function SearchBar(address: Props) {
-    const [searchTerm, setSearchTerm] = React.useState<string>("");
-    
+let initialState = ""
 
-    return(
-        <div className='search-bar'>
-            <input
-                type='text'
-                value={searchTerm}
-                onChange={(e: any) => console.log(e.target.value)}
-                placeholder='Search for property…'
+export default function SearchBar({ address }: Props) {
+    const [searchTerm, setSearchTerm] = React.useState<string>("");
+
+    function renderClearButton() {
+        if (searchTerm) {
+            return <button
+                onClick={(e: React.FormEvent<HTMLButtonElement>) => setSearchTerm("")}>
+                <AiOutlineCloseSquare size={25} />
+            </button>
+        } else if (searchTerm === "") {
+            return;
+        }
+    }
+
+    React.useEffect(() => {
+        if (searchTerm) {
+            console.log(searchTerm)
+        }
+    })
+
+    return (
+        <>
+            <div className='search-bar-container'>
+            {renderClearButton()}
+                <input
+                    className='search-input'
+                    type='text'
+                    value={searchTerm}
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => setSearchTerm(e.currentTarget.value)}
+                    placeholder='Search for property…'
                 />
-                <AiOutlineSearch/>
-        </div>
+                <button><AiOutlineSearch size={25} /></button>
+            </div>
+        </>
     )
 }

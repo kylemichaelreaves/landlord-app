@@ -10,6 +10,7 @@ interface Props {
 
 export default function SearchResults (address: Props) {
 
+    
     return ( 
         <table>
         </table>
