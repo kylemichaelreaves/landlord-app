@@ -40,8 +40,6 @@ export default function App() {
       });
     }
 
-
-
     function getOwnedProperties(owner: string) {
       let url = 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson';
       const data: GeoJSON.GeoJsonProperties = fetch(url).then((r) => r.json())
@@ -165,11 +163,8 @@ export default function App() {
 
           console.log(`${propertyLocation} is owned by ${owner}`);
           console.log(`${owner} also owns: ${associatedProperties}`);
+        });
           
-          
-
-      });
-
       // propertyID isn't going to be any, but number | null;
       var propertyID: any = null;
 

@@ -21,6 +21,16 @@ export default function SearchBar({ address }: Props) {
             return;
         }
     }
+    function renderSearchButton() {
+        if (searchTerm !== "") {
+            return <button
+                onClick={(e: React.FormEvent<HTMLButtonElement>) => setSearchTerm(searchTerm)}>
+                <AiOutlineSearch size={25} />
+            </button>
+        } else {
+            return <button></button>
+        }
+    }
 
     React.useEffect(() => {
         if (searchTerm) {
@@ -31,7 +41,7 @@ export default function SearchBar({ address }: Props) {
     return (
         <>
             <div className='search-bar-container'>
-            {renderClearButton()}
+                {renderClearButton()}
                 <input
                     className='search-input'
                     type='text'
@@ -39,7 +49,7 @@ export default function SearchBar({ address }: Props) {
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setSearchTerm(e.currentTarget.value)}
                     placeholder='Search for property…'
                 />
-                <button><AiOutlineSearch size={25} /></button>
+                {renderSearchButton()}
             </div>
         </>
     )
