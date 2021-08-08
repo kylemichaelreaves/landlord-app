@@ -1,14 +1,13 @@
 import React from 'react';
 import '../../App.css';
 import { AiOutlineSearch, AiOutlineCloseSquare } from "react-icons/ai";
+import {Result} from '../../Result';
 
 interface Props {
-    address?: string;
+    onSearch: (search: Result) => void;
 }
 
-let initialState = ""
-
-export default function SearchBar({ address }: Props) {
+export default function SearchBar({ onSearch }: Props) {
     const [searchTerm, setSearchTerm] = React.useState<string>("");
 
     function renderClearButton() {
