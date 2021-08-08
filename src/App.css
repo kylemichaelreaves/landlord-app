@@ -29,8 +29,8 @@
   z-index: 1;
   font-size: 16px;
   height: 2.5rem;
-  position: relative;
   border: none;
+  display: block;
   
   
 }
@@ -66,7 +66,7 @@ h3 {
   font-weight: thinner;
   font-size: 30px;
   position: relative;
-  display: inline;
+  display: block-inline;
   
 }
 
@@ -84,13 +84,16 @@ h5 {
 .input-button {
   color: white;
   border-radius: 0;
-  position: relative;
-  display: flex;
+
+
 }
   
   
 .search-bar-container {
-  float: right;
-  align-items: center;
   
+  position: relative;
+  display: flex;
+  float: right;
+  /* align-items: center; */
+  z-index: 1;
 }  
