@@ -6,7 +6,6 @@ interface Props {
     searchResult: Result;
 }
 
-
 export default function ResultsTable ({searchResult}: Props) {
 
     const propertyAddressRef = React.useRef<HTMLSpanElement>(null);

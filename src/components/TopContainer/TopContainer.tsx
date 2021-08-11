@@ -2,31 +2,19 @@ import React from 'react';
 import '../../App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import ResultsTable from '../ResultsTable/ResultsTable';
+import { Result } from '../../Result';
 
-interface Result {
-    id: number;
-    propertyLocation: string;
-    ownersName: string;
-    ownersAddress: string;
-    associatedProperties?: {
-        id: number;
-        propertyLocation: string;
+let blankSearch: Result = {
+    id: 0,
+    propertyLocation: '',
+    ownersName: '',
+    ownersAddress: '',
+    associatedProperties: []
     }
-}
 
 export default function TopContainer() {
 
-    let blankSearch: Result = {
-        id: 0,
-        propertyLocation: '',
-        ownersName: '',
-        ownersAddress: '',
-
-
-    }
-
     const [search, setSearch] = React.useState<Result>(blankSearch)
-
 
     function sendSearch(search: Result) {
         setSearch(search);
@@ -40,7 +28,7 @@ export default function TopContainer() {
         <div className='top-container'>
             <div className='title'>FindYourLandlord <br /> <h3>by North NJ DSA</h3></div>
 
-            <SearchBar onSearch={sendSearch}/>
+            <SearchBar onSearch={sendSearch} />
             {/* <ResultsTable result={search}/> */}
 
         </div>

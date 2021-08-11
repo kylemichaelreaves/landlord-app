@@ -3,8 +3,27 @@ export interface Result {
     propertyLocation: string;
     ownersName: string;
     ownersAddress: string;
-    associatedProperties?: {
-        id: number;
-        propertyLocation: string;
-    }
+    associatedProperties?: AssociatedProperties[];
+}
+
+export interface PrivateResidence {
+    id: number;
+    streetAddress: string;
+    ownersName: string;
+    ownersAddres: string;
+    associatedProperties: AssociatedProperties[];
+}
+
+export interface HousingProject {
+    id: number;
+    projectLocation: string;
+    management: string;
+    managementAddress: string;
+    manager: string;
+    associatedProperties?: AssociatedProperties[];
+}
+
+export interface AssociatedProperties {
+    id: number;
+    streetAddress: string;
 }
