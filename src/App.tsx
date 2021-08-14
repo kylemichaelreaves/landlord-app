@@ -19,7 +19,7 @@ export default function App() {
   var propertyDisplay = document.getElementById('propertyAddressRef');
   var ownerDisplay = document.getElementById('ownerNameRef');
   var ownerAddressDisplay = document.getElementById('ownerAddressRef');
-  var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef'); 
+  var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef');
   var hoverStateId = null;
   React.useEffect(() => {
 
@@ -109,7 +109,7 @@ export default function App() {
     //     return filtered[0];
     //   }
     // }
-      map.on('load', function () {
+    map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson',
@@ -142,10 +142,7 @@ export default function App() {
               ["interpolate", ["linear"], ["to-number", ["get", 'units']], 0, 180, 100, 900]
             ]
           ],
-
-
           'circle-opacity': defaultOpacity,
-
           'circle-color': [
             "case",
             // to-number returns the string as a number
@@ -159,7 +156,6 @@ export default function App() {
             color1,
             white
           ]
-
         }
       });
 
@@ -218,65 +214,71 @@ export default function App() {
           filter: ['in', 'property-layer', feature.properties.asc_properties]
         });
 
-        if (e?.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
-          propertyDisplay.textContent = propertyAddress;
-          ownerDisplay.textContent = propertyOwner;
-          ownerAddressDisplay.textContent = ownerAddress;
-          associatedPropertiesDisplay.textContent = associatedProperties;
-        }
-        if (propertyID) {
-          map.removeFeatureState({
-            source: 'propertyData',
-            id: propertyID
-          });
-        }
-
-        map.setFeatureState(
-          {
-            source: 'propertyData',
-            id: propertyID
-          },
-          {
-            hover: true
+        React.useEffect(() => {
+          if (relatedFeatures) {
+            console.log(relatedFeatures)
           }
-        );
-        // console.log(feature.properties.asc_properties)
-      });
-      // Add highlight layier
 
-      map.on('mouseleave', 'property-layer', (e: any) => {
-        if (propertyID) {
+
+          if (e?.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
+            propertyDisplay.textContent = propertyAddress;
+            ownerDisplay.textContent = propertyOwner;
+            ownerAddressDisplay.textContent = ownerAddress;
+            associatedPropertiesDisplay.textContent = associatedProperties;
+          }
+          if (propertyID) {
+            map.removeFeatureState({
+              source: 'propertyData',
+              id: propertyID
+            });
+          }
+
           map.setFeatureState(
             {
               source: 'propertyData',
               id: propertyID
             },
             {
-              hover: false
+              hover: true
             }
           );
-        }
-        propertyID = null;
-        if (propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
-          // reseting state
-          propertyDisplay.textContent = '';
-          ownerDisplay.textContent = '';
-          ownerAddressDisplay.textContent = '';
-          associatedPropertiesDisplay.textContent = '';
-        }
-        map.getCanvas().style.cursor = '';
-      })
+          // console.log(feature.properties.asc_properties)
+        });
+        // Add highlight layier
+
+        map.on('mouseleave', 'property-layer', (e: any) => {
+          if (propertyID) {
+            map.setFeatureState(
+              {
+                source: 'propertyData',
+                id: propertyID
+              },
+              {
+                hover: false
+              }
+            );
+          }
+          propertyID = null;
+          if (propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
+            // reseting state
+            propertyDisplay.textContent = '';
+            ownerDisplay.textContent = '';
+            ownerAddressDisplay.textContent = '';
+            associatedPropertiesDisplay.textContent = '';
+          }
+          map.getCanvas().style.cursor = '';
+        })
+      });
     });
-  });
 
-  return (
+    return (
 
-    <div className="App">
-      <div className='top-container'>
-        <TopContainer />
+      <div className="App">
+        <div className='top-container'>
+          <TopContainer />
+        </div>
+        <div ref={mapContainer} className="map-container" />
       </div>
-      <div ref={mapContainer} className="map-container" />
-    </div>
 
-  );
-}
+    );
+  }
