@@ -10,7 +10,7 @@ let blankSearch: Result = {
     ownersName: '',
     ownersAddress: '',
     associatedProperties: []
-    }
+}
 
 export default function TopContainer() {
 
@@ -21,17 +21,17 @@ export default function TopContainer() {
     }
 
     return (
-
-
-
-
         <div className='top-container'>
             <div className='title'>FindYourLandlord <br /> <h3>by North NJ DSA</h3></div>
-
             <SearchBar onSearch={sendSearch} />
-            {/* <ResultsTable result={search}/> */}
-
+            <ResultsTable searchResult={search} />
         </div>
-
-    )
+    )   
 }
+
+
+        
+
+
+
+        

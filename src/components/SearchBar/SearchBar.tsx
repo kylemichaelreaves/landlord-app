@@ -8,16 +8,19 @@ interface Props {
 }
 
 export default function SearchBar({ onSearch }: Props) {
-    const [searchTerm, setSearchTerm] = React.useState<string>("");
+
+    const blankSearch = '';
+    const [searchTerm, setSearchTerm] = React.useState<string>(blankSearch);
+    const [searchResults, setSearchResults] = React.useState<Result[]>([])
 
     function renderClearButton() {
         if (searchTerm) {
             return <button
-                onClick={(e: React.FormEvent<HTMLButtonElement>) => setSearchTerm("")}>
+                onClick={(e: React.FormEvent<HTMLButtonElement>) => setSearchTerm(blankSearch)}>
                 <AiOutlineCloseSquare size={25} />
             </button>
         } else if (searchTerm === "") {
-            return;
+            return <button></button>;
         }
     }
     function renderSearchButton() {
@@ -45,7 +48,8 @@ export default function SearchBar({ onSearch }: Props) {
                     className='search-input'
                     type='text'
                     value={searchTerm}
-                    onChange={(e: React.FormEvent<HTMLInputElement>) => setSearchTerm(e.currentTarget.value)}
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => 
+                        setSearchTerm(e.currentTarget.value)}
                     placeholder='Search for property…'
                 />
                 {renderSearchButton()}
