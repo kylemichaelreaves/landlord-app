@@ -19,7 +19,7 @@ export default function App() {
   var propertyDisplay = document.getElementById('propertyAddressRef');
   var ownerDisplay = document.getElementById('ownerNameRef');
   var ownerAddressDisplay = document.getElementById('ownerAddressRef');
-  var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef');
+  var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef'); 
   var hoverStateId = null;
   React.useEffect(() => {
 
@@ -45,9 +45,9 @@ export default function App() {
         return f?.properties?.owners_name
       })
 
-    // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
-    //     return f?.properties.property_location
-    //   })
+      // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
+      //     return f?.properties.property_location
+      //   })
     }
 
     // function createPopUp(currentFeature: GeoJSON.GeoJsonProperties) {
@@ -109,8 +109,7 @@ export default function App() {
     //     return filtered[0];
     //   }
     // }
-
-    map.on('load', function () {
+      map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson',
@@ -124,7 +123,7 @@ export default function App() {
         paint: {
           'circle-radius': [
             "interpolate",
-            ["exponential", .5],
+            ["exponential", .75],
             ["zoom"],
             8, ["case",
               ["boolean", ["feature-state", "hover"], false],
@@ -143,7 +142,10 @@ export default function App() {
               ["interpolate", ["linear"], ["to-number", ["get", 'units']], 0, 180, 100, 900]
             ]
           ],
+
+
           'circle-opacity': defaultOpacity,
+
           'circle-color': [
             "case",
             // to-number returns the string as a number
@@ -157,6 +159,7 @@ export default function App() {
             color1,
             white
           ]
+
         }
       });
 
@@ -203,7 +206,6 @@ export default function App() {
         map.getCanvas().style.cursor = 'pointer';
 
         var feature = e?.features[0]
-        var propertyID = e?.features[0].id;
 
         var propertyAddress = e?.feature?.properties?.property_location;
         var propertyOwner = e?.feature?.properties?.owners_name;
@@ -214,10 +216,6 @@ export default function App() {
           sourceLayer: 'property-layer',
           filter: ['in', 'property-layer', feature.properties.asc_properties]
         });
-
-        if(relatedFeatures) {
-          console.log(relatedFeatures)
-        }
 
         if (e?.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
           propertyDisplay.textContent = propertyAddress;
@@ -231,6 +229,7 @@ export default function App() {
             id: propertyID
           });
         }
+        propertyID = e?.features[0].id;
 
         map.setFeatureState(
           {
