@@ -6,7 +6,6 @@ import TopContainer from './components/TopContainer/TopContainer';
 import { defaultColors, color4, color3, color2, color1, white, defaultOpacity, dsaRed } from './constants';
 import { Result } from './Result';
 
-
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZXJlYXZlcyIsImEiOiJja3FvaGcxb2MxbXBjMndvMXYwa2t6NnBlIn0.HhkYznr4TH2i6mnV1KIvRw';
 
 export default function App() {
@@ -19,8 +18,9 @@ export default function App() {
   var propertyDisplay = document.getElementById('propertyAddressRef');
   var ownerDisplay = document.getElementById('ownerNameRef');
   var ownerAddressDisplay = document.getElementById('ownerAddressRef');
-  var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef'); 
+  var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef');
   var hoverStateId = null;
+
   React.useEffect(() => {
 
     const map = new mapboxgl.Map({
@@ -109,7 +109,7 @@ export default function App() {
     //     return filtered[0];
     //   }
     // }
-      map.on('load', function () {
+    map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson',
@@ -192,7 +192,7 @@ export default function App() {
         let associatedProperties = feature?.properties?.asc_properties
 
         console.log(`${propertyLocation} is owned by ${owner}`);
-        console.log(`${associatedProperties.length}`)
+        console.log(`...who owns ${associatedProperties.length} property/ies`)
         if (associatedProperties.length > 1) {
           console.log(`${owner} also owns: ${associatedProperties}`);
         }
