@@ -16,13 +16,13 @@ export default function ResultsTable({ searchResult }: Props) {
     // const associatedPropertiesRef = React.useRef<HTMLSpanElement>(null);
 
     function renderHeader() {
-        const columns: string[] = [
+        const verticalHeaders: string[] = [
             'Street Address',
             'Owner',
             "Owner's Mailing Address",
             "Associated Properties"
         ]
-        return columns.map((col: string, index: number) => {
+        return verticalHeaders.map((col: string, index: number) => {
             return <th key={index}>{col}</th>
         });
     }
@@ -30,12 +30,36 @@ export default function ResultsTable({ searchResult }: Props) {
     function renderBody() {
         return (
             <tr key={searchResult.id}>
-                <td>{searchResult.propertyLocation}</td>
-                <td>{searchResult.ownersName}</td>
-                <td>{searchResult.ownersAddress}</td>
-                <td>{searchResult.associatedProperties}</td>
+                <th>{searchResult.propertyLocation}</th>
+                <th>{searchResult.ownersName}</th>
+                <th>{searchResult.ownersAddress}</th>
+                <th>{searchResult.associatedProperties}</th>
             </tr>
         );
+    }
+
+    function renderTable() {
+        return (
+            <table id="property-info">
+                <tr>
+                    <th>Property Location:</th>
+                    <td>{searchResult.propertyLocation}</td>
+                </tr>
+                <tr>
+                    <th>Owner's Name:</th>
+                    <td>{searchResult.ownersName}</td>
+                </tr>
+                <tr>
+                    <th>Owner's Address:</th>
+                    <td>{searchResult.ownersAddress}</td>
+                </tr>
+                <tr>
+                    <th>Associated Properties:</th>
+                    <td>{searchResult.associatedProperties}</td>
+                </tr>
+            </table>
+
+        )
     }
 
     // // return a table of the values
