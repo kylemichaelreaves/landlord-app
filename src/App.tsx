@@ -123,7 +123,7 @@ export default function App() {
         paint: {
           'circle-radius': [
             "interpolate",
-            ["exponential", .75],
+            ["exponential", .5],
             ["zoom"],
             8, ["case",
               ["boolean", ["feature-state", "hover"], false],
@@ -206,6 +206,7 @@ export default function App() {
         map.getCanvas().style.cursor = 'pointer';
 
         var feature = e?.features[0]
+        var propertyID = e?.features[0].id;
 
         var propertyAddress = e?.feature?.properties?.property_location;
         var propertyOwner = e?.feature?.properties?.owners_name;
@@ -229,7 +230,6 @@ export default function App() {
             id: propertyID
           });
         }
-        propertyID = e?.features[0].id;
 
         map.setFeatureState(
           {
