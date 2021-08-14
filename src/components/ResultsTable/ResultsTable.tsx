@@ -61,6 +61,7 @@ export default function ResultsTable({ searchResult }: Props) {
                             </tr>
                         </table>
                     )
+                // if there aren't any associatedProperties don't render the row 
                 } else if (searchResult.associatedProperties?.length === 1) {
                     return (
                         <table id="property-info">
@@ -76,7 +77,7 @@ export default function ResultsTable({ searchResult }: Props) {
                                 <th>Owner's Address:</th>
                                 <td>{searchResult.ownersAddress}</td>
                             </tr>
-                            </table>
+                        </table>
                     )
                 }
 
