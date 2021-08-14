@@ -45,9 +45,9 @@ export default function App() {
         return f?.properties?.owners_name
       })
 
-      // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
-      //     return f?.properties.property_location
-      //   })
+    // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
+    //     return f?.properties.property_location
+    //   })
     }
 
     // function createPopUp(currentFeature: GeoJSON.GeoJsonProperties) {
@@ -109,6 +109,7 @@ export default function App() {
     //     return filtered[0];
     //   }
     // }
+
     map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
@@ -214,71 +215,69 @@ export default function App() {
           filter: ['in', 'property-layer', feature.properties.asc_properties]
         });
 
-        React.useEffect(() => {
-          if (relatedFeatures) {
-            console.log(relatedFeatures)
-          }
+        if(relatedFeatures) {
+          console.log(relatedFeatures)
+        }
 
+        if (e?.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
+          propertyDisplay.textContent = propertyAddress;
+          ownerDisplay.textContent = propertyOwner;
+          ownerAddressDisplay.textContent = ownerAddress;
+          associatedPropertiesDisplay.textContent = associatedProperties;
+        }
+        if (propertyID) {
+          map.removeFeatureState({
+            source: 'propertyData',
+            id: propertyID
+          });
+        }
 
-          if (e?.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
-            propertyDisplay.textContent = propertyAddress;
-            ownerDisplay.textContent = propertyOwner;
-            ownerAddressDisplay.textContent = ownerAddress;
-            associatedPropertiesDisplay.textContent = associatedProperties;
+        map.setFeatureState(
+          {
+            source: 'propertyData',
+            id: propertyID
+          },
+          {
+            hover: true
           }
-          if (propertyID) {
-            map.removeFeatureState({
-              source: 'propertyData',
-              id: propertyID
-            });
-          }
+        );
+        // console.log(feature.properties.asc_properties)
+      });
+      // Add highlight layier
 
+      map.on('mouseleave', 'property-layer', (e: any) => {
+        if (propertyID) {
           map.setFeatureState(
             {
               source: 'propertyData',
               id: propertyID
             },
             {
-              hover: true
+              hover: false
             }
           );
-          // console.log(feature.properties.asc_properties)
-        });
-        // Add highlight layier
-
-        map.on('mouseleave', 'property-layer', (e: any) => {
-          if (propertyID) {
-            map.setFeatureState(
-              {
-                source: 'propertyData',
-                id: propertyID
-              },
-              {
-                hover: false
-              }
-            );
-          }
-          propertyID = null;
-          if (propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
-            // reseting state
-            propertyDisplay.textContent = '';
-            ownerDisplay.textContent = '';
-            ownerAddressDisplay.textContent = '';
-            associatedPropertiesDisplay.textContent = '';
-          }
-          map.getCanvas().style.cursor = '';
-        })
-      });
+        }
+        propertyID = null;
+        if (propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
+          // reseting state
+          propertyDisplay.textContent = '';
+          ownerDisplay.textContent = '';
+          ownerAddressDisplay.textContent = '';
+          associatedPropertiesDisplay.textContent = '';
+        }
+        map.getCanvas().style.cursor = '';
+      })
     });
+  });
 
-    return (
+  return (
 
-      <div className="App">
-        <div className='top-container'>
-          <TopContainer />
-        </div>
-        <div ref={mapContainer} className="map-container" />
+    <div className="App">
+      <div className='top-container'>
+        <TopContainer />
       </div>
+      <div ref={mapContainer} className="map-container" />
+    </div>
 
-    );
-  }
+  );
+}
