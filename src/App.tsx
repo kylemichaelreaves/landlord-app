@@ -4,7 +4,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import TopContainer from './components/TopContainer/TopContainer';
 import { defaultColors, color4, color3, color2, color1, white, defaultOpacity, dsaRed } from './constants';
-import { Result } from './Result';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZXJlYXZlcyIsImEiOiJja3FvaGcxb2MxbXBjMndvMXYwa2t6NnBlIn0.HhkYznr4TH2i6mnV1KIvRw';
 
@@ -173,7 +172,7 @@ export default function App() {
           return;
         };
 
-        var feature = features[0]
+        var feature = features[0];
 
         var popup = new mapboxgl.Popup({ offset: [0, -15] })
           .setLngLat(e.lngLat)
@@ -192,12 +191,12 @@ export default function App() {
         let associatedProperties = feature?.properties?.asc_properties
 
         console.log(`${propertyLocation} is owned by ${owner}`);
-        console.log(`...who owns ${associatedProperties.length} property/ies`)
+        console.log(`...who owns ${associatedProperties} property/ies`)
         if (associatedProperties.length > 1) {
           console.log(`${owner} also owns: ${associatedProperties}`);
         }
-
       });
+
 
       // propertyID isn't going to be any, but number | null;
       var propertyID: any = null;
@@ -229,6 +228,7 @@ export default function App() {
             id: propertyID
           });
         }
+        
         propertyID = e?.features[0].id;
 
         map.setFeatureState(
