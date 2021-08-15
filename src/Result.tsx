@@ -16,10 +16,12 @@ export interface PrivateResidence {
 
 export interface HousingProject {
     id: number;
-    projectLocation: string;
-    management: string;
+    projectName: string;
+    streetAddress: string;
+    managementCompany: string;
     managementAddress: string;
     manager: string;
+    // this is ambiguous≥…associated with the manager? or the managementCompany?
     associatedProperties?: AssociatedProperties[];
 }
 
