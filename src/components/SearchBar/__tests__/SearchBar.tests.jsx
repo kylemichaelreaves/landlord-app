@@ -11,5 +11,4 @@ test('search bar appears in document', () => {
    
 test('search bar accepts Props', () => {
     render(<SearchBar onSearch={() => {}}/>)
-
 })
