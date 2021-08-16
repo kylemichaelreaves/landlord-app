@@ -3,13 +3,13 @@ import '../../App.css';
 import { Result } from '../../Result';
 
 interface Props {
-    searchResult: Result;
+    searchResult?: Result;
 }
 
 // returns a table if there is an active searchResult
 export default function ResultsTable({ searchResult }: Props) {
 
-    function renderTable(searchResult: Result) {
+    function renderTable() {
         if (searchResult) {
             if (searchResult.associatedProperties?.length) {
                 if (searchResult.associatedProperties?.length > 1) {
@@ -57,8 +57,9 @@ export default function ResultsTable({ searchResult }: Props) {
     }
 
     return (
-        <div>
-            {renderTable}
+        <div role='table'>
+            {/* the parathesis is necessary to avoid errors */}
+            {renderTable()}
         </div>
     )
 }
