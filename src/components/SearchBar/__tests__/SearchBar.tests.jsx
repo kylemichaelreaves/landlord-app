@@ -5,10 +5,16 @@ import '@testing-library/jest-dom';
 import SearchBar from '../SearchBar';
 
 test('search bar appears in document', () => {
-    render(<SearchBar />)
+    render(<SearchBar />);
     expect(screen.getByPlaceholderText('Search for property…')).toBeInTheDocument()
 })
    
 test('search bar accepts Props', () => {
     render(<SearchBar onSearch={() => {}}/>)
+})
+
+test('search bar has buttons', () => {
+    render(<SearchBar />);
+    const submitButton = screen.queryByText('submit')
+    expect(submitButton).toBeNull();
 })
