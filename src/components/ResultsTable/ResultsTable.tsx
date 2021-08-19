@@ -61,10 +61,10 @@ export default function ResultsTable({ searchResult }: Props) {
 
     return (
         <>
-        {/* //  <div role="table"> */}
+        
             {/* the parathesis is necessary to avoid errors */}
             {renderTable()}
-        {/* // </div> */}
+        
         </>
     )
 }
