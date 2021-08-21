@@ -22,7 +22,7 @@ export default function TopContainer() {
 
     return (
         <div className='top-container'>
-            <div className='title'>FindYourLandlord <br /> <h3>by North NJ DSA</h3></div>
+            <div className='title'>FindYourLandlord</div>
             <SearchBar onSearch={sendSearch} />
             <ResultsTable searchResult={search} />
         </div>
