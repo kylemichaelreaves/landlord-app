@@ -18,7 +18,7 @@ export default function App() {
   var ownerDisplay = document.getElementById('ownerNameRef');
   var ownerAddressDisplay = document.getElementById('ownerAddressRef');
   var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef');
-  var hoverStateId = null;
+  
 
   React.useEffect(() => {
 
@@ -65,8 +65,8 @@ export default function App() {
     //     popup.addTo(map);
     //   }
     // }
-
     //   function getBbox(sortedAddresses: any, addressIdentifier: any, searchResult: any) {
+
     //     var lats = [
     //       sortedAddresses.features[addressIdentifier].geometry.coordinates[1],
     //       searchResult.coordinates[1]
@@ -84,6 +84,7 @@ export default function App() {
     //       }
     //       return 0;
     //     });
+
     //     var sortedLats = lats.sort(function (a, b) {
     //       if (a > b) {
     //         return 1;
@@ -108,6 +109,7 @@ export default function App() {
     //     return filtered[0];
     //   }
     // }
+    
     map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
@@ -197,7 +199,6 @@ export default function App() {
         }
       });
 
-
       // propertyID isn't going to be any, but number | null;
       var propertyID: any = null;
 
@@ -228,7 +229,7 @@ export default function App() {
             id: propertyID
           });
         }
-        
+
         propertyID = e?.features[0].id;
 
         map.setFeatureState(
