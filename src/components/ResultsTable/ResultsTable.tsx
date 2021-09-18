@@ -62,7 +62,7 @@ export default function ResultsTable({ searchResult }: Props) {
     return (
         <>
         
-            {/* the parathesis is necessary to avoid errors */}
+            {/* the parathesis after renderTable is necessary to avoid errors */}
             {renderTable()}
         
         </>
