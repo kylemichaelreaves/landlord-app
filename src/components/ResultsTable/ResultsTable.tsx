@@ -13,7 +13,7 @@ export default function ResultsTable({ searchResult }: Props) {
     function renderTable() {
         if (searchResult) {
             if (searchResult.associatedProperties?.length) {
-                if (searchResult.associatedProperties?.length > 1) {
+                if (searchResult.associatedProperties.length > 1) {
                     return (
                         <table id="property-info" role='table'>
                             <tr>
