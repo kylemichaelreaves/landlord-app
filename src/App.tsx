@@ -36,18 +36,18 @@ export default function App() {
       });
     }
 
-    function getOwnedProperties(owner: string) {
-      let url = 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson';
-      const data: GeoJSON.GeoJsonProperties = fetch(url).then((r) => r.json())
+    // function getOwnedProperties(owner: string) {
+    //   let url = 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson';
+    //   const data: GeoJSON.GeoJsonProperties = fetch(url).then((r) => r.json())
 
-      return data.features.map(function (f: GeoJSON.Feature) {
-        return f?.properties?.owners_name
-      })
+    //   return data.features.map(function (f: GeoJSON.Feature) {
+    //     return f?.properties?.owners_name
+    //   })
 
-      // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
-      //     return f?.properties.property_location
-      //   })
-    }
+    //   // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
+    //   //     return f?.properties.property_location
+    //   //   })
+    // }
 
     // function createPopUp(currentFeature: GeoJSON.GeoJsonProperties) {
     //   var popUps = document.getElementsByClassName('mapboxgl-popup');
