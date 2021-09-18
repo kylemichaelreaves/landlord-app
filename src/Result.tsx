@@ -21,7 +21,7 @@ export interface HousingProject {
     managementCompany: string;
     managementAddress: string;
     manager: string;
-    // this is ambiguous≥…associated with the manager? or the managementCompany?
+    // this is ambiguous…associated with the manager? or the managementCompany?
     associatedProperties?: AssociatedProperties[];
 }
 

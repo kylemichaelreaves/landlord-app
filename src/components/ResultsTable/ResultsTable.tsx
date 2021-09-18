@@ -3,18 +3,19 @@ import '../../App.css';
 import { Result } from '../../Result';
 
 interface Props {
-    searchResult?: Result;
+    searchResult: Result;
 }
 
 // returns a table if there is an active searchResult
+// if the props are not present or is the incorrect type, the table should not render
 export default function ResultsTable({ searchResult }: Props) {
 
     function renderTable() {
         if (searchResult) {
             if (searchResult.associatedProperties?.length) {
-                if (searchResult.associatedProperties?.length > 1) {
+                if (searchResult.associatedProperties.length > 1) {
                     return (
-                        <table id="property-info">
+                        <table id="property-info" role='table'>
                             <tr>
                                 <th>Property Location:</th>
                                 <td>{searchResult.propertyLocation}</td>
@@ -36,7 +37,7 @@ export default function ResultsTable({ searchResult }: Props) {
                 // if there aren't any associatedProperties don't render the row 
                 } else if (searchResult.associatedProperties?.length === 1) {
                     return (
-                        <table id="property-info">
+                        <table id="property-info" role='table'>
                             <tr>
                                 <th>Property Location:</th>
                                 <td>{searchResult.propertyLocation}</td>
@@ -52,14 +53,18 @@ export default function ResultsTable({ searchResult }: Props) {
                         </table>
                     )
                 }
-            }
+            } 
+        } else {
+            return null;
         }
     }
 
     return (
-        <div role='table'>
-            {/* the parathesis is necessary to avoid errors */}
+        <>
+        
+            {/* the parathesis after renderTable is necessary to avoid errors */}
             {renderTable()}
-        </div>
+        
+        </>
     )
 }
