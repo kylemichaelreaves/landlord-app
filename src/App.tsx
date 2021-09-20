@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
+import { mapBoxAccessToken } from './accessToken';
 import TopContainer from './components/TopContainer/TopContainer';
 import { defaultColors, color4, color3, color2, color1, white, defaultOpacity, dsaRed } from './constants';
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZXJlYXZlcyIsImEiOiJja3FvaGcxb2MxbXBjMndvMXYwa2t6NnBlIn0.HhkYznr4TH2i6mnV1KIvRw';
+mapboxgl.accessToken = mapBoxAccessToken;
 
 export default function App() {
 
