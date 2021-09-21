@@ -6,6 +6,8 @@ import { mapBoxAccessToken } from './accessToken';
 import TopContainer from './components/TopContainer/TopContainer';
 import { defaultColors, color4, color3, color2, color1, white, defaultOpacity, dsaRed } from './constants';
 
+// it is WORST practice to include private keys on public repos,
+// …even if that key is associated with a free account; include all keys in gitignore
 mapboxgl.accessToken = mapBoxAccessToken;
 
 export default function App() {
@@ -19,7 +21,6 @@ export default function App() {
   var ownerDisplay = document.getElementById('ownerNameRef');
   var ownerAddressDisplay = document.getElementById('ownerAddressRef');
   var associatedPropertiesDisplay = document.getElementById('associatedPropertiesRef');
-  
 
   React.useEffect(() => {
 
@@ -110,7 +111,7 @@ export default function App() {
     //     return filtered[0];
     //   }
     // }
-    
+
     map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
@@ -244,7 +245,7 @@ export default function App() {
         );
         // console.log(feature.properties.asc_properties)
       });
-      // Add highlight layier
+      // Add highlight layer
 
       map.on('mouseleave', 'property-layer', (e: any) => {
         if (propertyID) {
