@@ -43,11 +43,11 @@ export default function App() {
     //   const data: GeoJSON.GeoJsonProperties = fetch(url).then((r) => r.json())
 
     //   return data.features.map(function (f: GeoJSON.Feature) {
-    //     return f?.properties?.owners_name
+    //     return f?.properties?.ownersName
     //   })
 
     //   // return data.features.properties.map(function(f: GeoJSON.GeoJsonProperties) {
-    //   //     return f?.properties.property_location
+    //   //     return f?.properties.propertyLocation
     //   //   })
     // }
 
@@ -115,7 +115,7 @@ export default function App() {
     map.on('load', function () {
       map.addSource('propertyData', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/kylemichaelreaves/landlord_data/master/test_data.geojson',
+        data: 'https://mymappingbucket.s3.amazonaws.com/jersey_city.geojson',
         'generateId': true
       });
 
@@ -152,13 +152,13 @@ export default function App() {
           'circle-color': [
             "case",
             // to-number returns the string as a number
-            [">=", ["to-number", ["get", 'num_asc_properties']], 100],
+            [">=", ["to-number", ["get", 'numberPropertiesOwned']], 100],
             color4,
-            [">=", ["to-number", ["get", 'num_asc_properties']], 10],
+            [">=", ["to-number", ["get", 'numberPropertiesOwned']], 10],
             color3,
-            [">=", ["to-number", ["get", 'num_asc_properties']], 3],
+            [">=", ["to-number", ["get", 'numberPropertiesOwned']], 3],
             color2,
-            [">", ["to-number", ["get", 'num_asc_properties']], 0],
+            [">", ["to-number", ["get", 'numberPropertiesOwned']], 0],
             color1,
             white
           ]
@@ -181,18 +181,18 @@ export default function App() {
         var popup = new mapboxgl.Popup({ offset: [0, -15] })
           .setLngLat(e.lngLat)
           .setHTML(
-            '<h3>' + feature.properties?.property_location + '</h3>' +
-            '<p>' + feature.properties?.owners_name + '</p>' +
-            '<p>' + feature.properties?.owners_mailing_address + '</p>' +
-            '<p>' + feature.properties?.city_state_zip + '</p>' +
-            '<p>' + feature.properties?.num_asc_properties + '</p>'
+            '<h3>' + feature.properties?.propertyLocation + '</h3>' +
+            '<p>' + feature.properties?.ownersName + '</p>' +
+            '<p>' + feature.properties?.ownersMailingAddress + '</p>' +
+            '<p>' + feature.properties?.cityStateZip + '</p>' +
+            '<p>' + feature.properties?.numberPropertiesOwned + '</p>'
           )
           .addTo(map);
         flyToAddress(feature);
 
-        let propertyLocation = feature?.properties?.property_location;
-        let owner = feature?.properties?.owners_name;
-        let associatedProperties = feature?.properties?.asc_properties
+        let propertyLocation = feature?.properties?.propertyLocation;
+        let owner = feature?.properties?.ownersName;
+        let associatedProperties = feature?.properties?.propertiesOwned
 
         console.log(`${propertyLocation} is owned by ${owner}`);
         console.log(`...who owns ${associatedProperties} property/ies`)
@@ -209,14 +209,14 @@ export default function App() {
 
         var feature = e?.features[0]
 
-        var propertyAddress = e?.feature?.properties?.property_location;
-        var propertyOwner = e?.feature?.properties?.owners_name;
-        var ownerAddress = e?.feature?.properties?.owners_mailing_address;
-        var associatedProperties = e?.feature?.properties?.num_asc_properties;
-
+        var propertyAddress = e?.feature?.properties?.propertyLocation;
+        var propertyOwner = e?.feature?.properties?.ownersName;
+        var ownerAddress = e?.feature?.properties?.ownersMailingAddress;
+        var associatedProperties = e?.feature?.properties?.numberPropertiesOwned;
+        
         var relatedFeatures = map.querySourceFeatures('property-layer', {
           sourceLayer: 'property-layer',
-          filter: ['in', 'property-layer', feature.properties.asc_properties]
+          filter: ['in', 'property-layer', feature.properties.propertiesOwned]
         });
 
         if (e?.features.length > 0 && propertyDisplay && ownerDisplay && ownerAddressDisplay && associatedPropertiesDisplay) {
@@ -243,7 +243,7 @@ export default function App() {
             hover: true
           }
         );
-        // console.log(feature.properties.asc_properties)
+        // console.log(feature.properties.propertiesOwned)
       });
       // Add highlight layer
 
